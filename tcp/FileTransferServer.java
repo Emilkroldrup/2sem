@@ -12,7 +12,8 @@ public class FileTransferServer {
         int port = 8080;
 
         // File to be sent to the client
-        String filePath = "path/to/file.txt";
+        String filePath = "3semester/files/file.txt";
+        // String filePath = "3semester/files/Wong.png";
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             logger.info("Server listening on port " + port);
