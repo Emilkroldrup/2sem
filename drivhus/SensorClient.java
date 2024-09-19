@@ -6,18 +6,16 @@ import java.util.Random;
 
 public class SensorClient implements Runnable {
     private String sensorType;
-    private String serverHost;
-    private int serverPort;
+    private static final String serverHost = "localhost"; // constant
+    private static final int serverPort = 12345; // constant
     
     public SensorClient(String sensorType, String serverHost, int serverPort) {
         this.sensorType = sensorType;
-        this.serverHost = serverHost;
-        this.serverPort = serverPort;
     }
 
     private double generateData() {
         Random rand = new Random();
-        switch (sensorType) {
+        switch (sensorType) { // switch case which will give random numbers to the differents s
             case "Temperature":
                 return 5 + (35 - 5) * rand.nextDouble(); // Random temp between 5 and 35
             case "Humidity":
@@ -32,7 +30,7 @@ public class SensorClient implements Runnable {
     @Override
     public void run() {
         try (Socket socket = new Socket(serverHost, serverPort);
-             PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
 
             while (true) {
                 double data = generateData();
@@ -45,9 +43,6 @@ public class SensorClient implements Runnable {
     }
 
     public static void main(String[] args) {
-        String serverHost = "localhost";
-        int serverPort = 12345;
-
         // Start Temperature Sensor
         SensorClient temperatureSensor = new SensorClient("Temperature", serverHost, serverPort);
         new Thread(temperatureSensor).start();

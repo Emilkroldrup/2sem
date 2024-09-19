@@ -8,11 +8,11 @@ public class AlarmChecker {
     private static final double LOW_SOIL_MOISTURE_THRESHOLD = 20.0;
 
     public static void checkThreshold(String data) {
-        String[] parts = data.split(": ");
+        String[] parts = data.split(": "); // adds colon between the case and the double value
         String sensorType = parts[0];
         double value = Double.parseDouble(parts[1]);
 
-        switch (sensorType) {
+        switch (sensorType) { // gives different alarms based on the numbers read
             case "Temperature":
                 if (value > HIGH_TEMP_THRESHOLD) {
                     System.out.println("ALARM: Temperature exceeds high threshold! (" + value + "°C)");
